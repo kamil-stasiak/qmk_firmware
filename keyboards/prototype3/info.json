@@ -29,6 +29,7 @@
     "layouts": {
         "LAYOUT_split_3x6_3": {
             "layout": [
+//                LEFT hand 1st ROW
                 {"matrix": [0, 0], "x": 0, "y": 0.25},
                 {"matrix": [0, 1], "x": 1, "y": 0.25},
                 {"matrix": [0, 2], "x": 2, "y": 0.125},
@@ -37,6 +38,7 @@
                 {"matrix": [0, 5], "x": 5, "y": 0.25},
                 {"matrix": [0, 6], "x": 8, "y": 0.25},
 
+//                RIGHT hand 1st row
                 {"matrix": [5, 6], "x": 8, "y": 0.25},
                 {"matrix": [5, 5], "x": 8, "y": 0.25},
                 {"matrix": [5, 4], "x": 9, "y": 0.125},
