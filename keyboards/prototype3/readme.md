@@ -1,27 +1,62 @@
 # prototype3
 
-![prototype3](imgur.com image replace me!)
+Funkcja użyta w pliku `keymaps/default/keymap.c -> LAYOUT_split_3x6_3` musi nazywać się tak,
+jak pole w pliku `info.json->layouts.LAYOUT_split_3x6_3`
+Zawartość tej funkcji musi być skojarzona z wpisem w `info.json` w 2 miejscach `matrix_pins` i `layouts`.
 
-*A short description of the keyboard/project*
+Matrix pins musi deklarować tyle pinów wejściowych na kolumny i wiersze,
+żeby możliwe było przypisanie wszystkich zadeklarowanych przycisków w `keymaps/default/keymap.c` i `info.json->layouts`.
+Jak rozumiem liczba zadeklarowanych przycisków w tych dwóch miejscach musi być równa
 
-* Keyboard Maintainer: [Kamil Stasiak](https://github.com/Kamil Stasiak)
-* Hardware Supported: *The PCBs, controllers supported*
-* Hardware Availability: *Links to where you can find this hardware*
+Nazwy pinów jakie należy wpisać do matrix_pins są tutaj: https://deskthority.net/wiki/Arduino_Pro_Micro#Pinout.
+Chodzi o nazwy w kolumnie `AVR` bez literki P na początku.
 
-Make example for this keyboard (after setting up your build environment):
+Połóżmy płytkę tak, że wejście usb jest od lewej strony a mikrokontroler od góry. Wtedy piny układają się tak
 
-    make prototype3:default
 
-Flashing example for this keyboard:
+    * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+    * │   │RAW│GND│RST│VCC│ F4│ F5│ F6│ F7│ B1│ B3│ B2│ B6│
+    * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───├───┼───┼───┤
+    * │USB│   │   │   │   │   │   │   │   │   │   │   │   │     
+    * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+    * │   │ D3│ D2│GND│GND│ D1│ D0│ D4│ C6│ D7│ E6│ B4│ B5│
+    * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
 
-    make prototype3:default:flash
+```json5
+{
+    "layouts": {
+        "LAYOUT_split_3x6_3": {
 
-See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
+            // 
+            "layout": [
+                {
+                    // matrix: [ROW, COLUMN]
+                    "matrix": [0, 0],
+                    // układ X Y gdzie początek układu to lewy górny róg
+                    // dlatego X to kolumny, Y to wiersze 
+                    // kolumny X rosną w prawo, wiersze Y rosną w dół
+                    "x": 0, "y": 0.25
+                },
+                {"matrix": [1, 0], "x": 0, "y": 1.25}
+            ]
+        }
+    }
+}
+```
 
-## Bootloader
+Keybaord matrix: https://pcbheaven.com/wikipages/How_Key_Matrices_Works/
+Początek kolumny połączony jest z pinem kolumny, początek wiersza połączony jest z pinem wiersza
 
-Enter the bootloader in 3 ways:
+SU120 wyprowadzając kabel TRRS połączył GND, VCC i pin D2 (PD2). To znaczy, że w `rules.mk` trzeba zadeklarować:
+```mk
+SPLIT_KEYBOARD = yes
+```
+a potem `info.json`
 
-* **Bootmagic reset**: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard
-* **Physical reset button**: Briefly press the button on the back of the PCB - some may have pads you must short instead
-* **Keycode in layout**: Press the key mapped to `QK_BOOT` if it is available
+```json5
+{
+  "split": {
+    "soft_serial_pin": "D2"
+  },
+}
+```
