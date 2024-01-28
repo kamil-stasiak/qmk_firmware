@@ -164,6 +164,14 @@ By default ta podłączona kablem to lewa
 > If neither options are defined, the handedness defaults to MASTER_LEFT.
 Tutaj opcje zmiany: https://docs.qmk.fm/#/feature_split_keyboard?id=setting-handedness
 
+# Falshowanie
+
+```shell
+qmk flash -kb prototype3 -km default -bl avrdude
+```
+
+kliknąć przycisk reset
+
 # Błędy
 
 ```shell
