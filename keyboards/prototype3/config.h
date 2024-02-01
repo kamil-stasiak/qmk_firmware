@@ -2,6 +2,9 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
+// default is 200, 500 and 300 is too long
+#define TAPPING_TERM 250
+
 
 /*
  * Feature disable options
