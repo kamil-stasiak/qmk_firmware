@@ -3,6 +3,17 @@
 
 #include QMK_KEYBOARD_H
 
+//const uint16_t PROGMEM left_arrow[] = {KC_J, KC_K, COMBO_END};
+//const uint16_t PROGMEM right_arrow[] = {KC_L, KC_K, COMBO_END};
+//const uint16_t PROGMEM up_arrow[] = {KC_J, KC_L, KC_I, COMBO_END};
+//const uint16_t PROGMEM down_arrow[] = {KC_J, KC_L, KC_K, COMBO_END};
+//combo_t key_combos[] = {
+//    COMBO(left_arrow, KC_LEFT),
+//    COMBO(right_arrow, KC_RIGHT),
+//    COMBO(up_arrow, KC_UP),
+//    COMBO(down_arrow, KC_DOWN),
+//};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      /*
       * ┌───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┐
@@ -20,28 +31,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       * └───┴───┴───┴───┴───┴───┘               └───┴───┴───┴───┴───┴───┘
       */
 
-//    [0] = LAYOUT_split_3x6_3(
-//          KC_ESC,       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,    KC_7,     KC_8,    KC_9,    KC_0,      KC_MINUS,
-//          KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                KC_Y,    KC_U,     KC_I,    KC_O,    KC_P,      KC_BACKSLASH,
-//          KC_BACKSPACE, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                KC_H,    KC_J,     KC_K,    KC_L, KC_SEMICOLON, KC_QUOTE,
-//          KC_NO,        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                KC_N,    KC_M,   KC_COMMA,   KC_DOT,  KC_SLASH,  KC_RIGHT_BRACKET,
-//          KC_NO,        KC_NO,   KC_NO,   MO(3),   MO(1),   KC_SPACE,          KC_SPACE,  MO(2),    MO(4),   KC_NO,   KC_NO,     KC_NO,
-//          KC_NO,        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ENTER,            KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,     KC_NO
-//    ),
-
     [0] = LAYOUT_split_3x6_3(
-        KC_ESC,       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,    KC_7,     KC_8,    KC_9,    KC_0,      KC_MINUS,
-        KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                KC_Y,    KC_U,     KC_I,    KC_O,    KC_P,      KC_BACKSLASH,
+        KC_ESC,       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,    KC_7,     KC_8,    KC_9,     KC_0,         KC_MINUS,
+        KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                KC_Y,    KC_U,     KC_I,    KC_O,     KC_P,         KC_BACKSLASH,
+//        KC_BACKSPACE, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,
+KC_BACKSPACE, RCTL_T(KC_A),    RGUI_T(KC_S),    RALT_T(KC_D),    RSFT_T(KC_F),    KC_G,
 
-        // left home row
-        KC_BACKSPACE, RCTL_T(KC_A),    RGUI_T(KC_S),    RALT_T(KC_D),    RSFT_T(KC_F),    KC_G,
-
-        // right home row
+//                        KC_H,    KC_J,     KC_K,    KC_L,   KC_SEMICOLON, KC_QUOTE,
         KC_H,    RSFT_T(KC_J),     RALT_T(KC_K),    RGUI_T(KC_L), RCTL_T(KC_SEMICOLON), KC_QUOTE,
 
-        KC_7,        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                KC_N,    KC_M,   KC_COMMA,   KC_DOT,  KC_SLASH,  KC_RIGHT_BRACKET,
-        KC_1,        KC_2,   KC_3,   MO(3),   MO(1),   KC_SPACE,          KC_SPACE,  MO(2),    MO(4),   KC_6,   KC_7,     KC_8,
-        KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ENTER,            KC_M,    KC_NO,   KC_NO,   KC_NO,   KC_NO,     KC_NO
+        KC_RIGHT_GUI, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                KC_N,    KC_M,   KC_COMMA,  KC_DOT,   KC_SLASH,   KC_RIGHT_BRACKET,
+       LGUI(KC_C), LGUI(KC_V), LSG(KC_V), MO(3), MO(1),   KC_SPACE,        KC_SPACE,     MO(2),  MO(4),    KC_6,     KC_7,         KC_8,
+        KC_NO,        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ENTER,     LGUI(KC_SPACE),  KC_NO,  KC_NO,  KC_NO,    KC_NO,        KC_NO
     ),
 
     [1] = LAYOUT_split_3x6_3(
@@ -63,19 +64,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //
     [3] = LAYOUT_split_3x6_3(
                           _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,      _______,        _______,         _______,    _______,
-                          _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,     KC_PAGE_UP,      _______,         _______,    _______,
-                          _______, KC_RIGHT_CTRL, KC_RIGHT_GUI, KC_RIGHT_ALT, KC_RIGHT_SHIFT,  _______,       KC_F13,        KC_HOME,    KC_PAGE_DOWN,      KC_END,         KC_F19,    _______,
-                          _______,    _______,    _______,    _______,    _______,    _______,                KC_F14,        KC_F15,      KC_F16,           KC_F17,         KC_F18,    _______,
+                          _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,     _______,      _______,         _______,    _______,
+                          _______, KC_RIGHT_CTRL, KC_RIGHT_GUI, KC_RIGHT_ALT, KC_RIGHT_SHIFT,  _______,       _______,        _______,    _______,      _______,         _______,    _______,
+                          _______,    _______,    _______,    _______,    _______,    _______,                _______,        _______,      _______,           _______,         _______,    _______,
                           _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,     _______,         _______,         _______,    _______,
                           _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,     _______,         _______,         _______,    _______
      ),
 
     [4] = LAYOUT_split_3x6_3(
                   _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,     _______,    _______,    _______,    _______,
-                  _______,    _______,    KC_1,       KC_2,    KC_3,    _______,                _______,       _______,     _______,    _______,    _______,    _______,
-                  _______,    KC_0,       KC_4,       KC_5,    KC_6,    _______,                _______,   KC_RIGHT_SHIFT, KC_RIGHT_ALT, KC_RIGHT_GUI, KC_RIGHT_CTRL, _______,
-                  _______,    _______,    KC_7,       KC_8,    KC_9,    _______,                _______,       _______,     _______,    _______,    _______,    _______,
-                  _______,    _______,    _______,    KC_0,    _______,    _______,                _______,       _______,     _______,    _______,    _______,    _______,
+                  _______,    _______,    _______,       _______,    _______,    _______,                _______,       _______,     _______,    _______,    _______,    _______,
+                  _______,    _______,       _______,       _______,    _______,    _______,                _______,   KC_RIGHT_SHIFT, KC_RIGHT_ALT, KC_RIGHT_GUI, KC_RIGHT_CTRL, _______,
+                  _______,    _______,    _______,       _______,    _______,    _______,                _______,       _______,     _______,    _______,    _______,    _______,
+                  _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,     _______,    _______,    _______,    _______,
                   _______,    _______,    _______,    _______,    _______,    _______,                _______,       _______,     _______,    _______,    _______,    _______
     ),
 
